@@ -1,7 +1,6 @@
 add_executable(VersaTerm
 	main.c
         framebuf.c
-        framebuf_vga.cpp
         framebuf_dvi.c
         font.c
         terminal.c
@@ -39,7 +38,6 @@ target_link_libraries(VersaTerm
 	pico_multicore
 	hardware_flash
 	libdvi
-        PicoVGA
         tinyusb_host
         tinyusb_device
 )

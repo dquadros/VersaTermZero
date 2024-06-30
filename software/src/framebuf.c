@@ -29,7 +29,7 @@
 #include "keyboard.h"
 #include "framebuf.h"
 #include "framebuf_dvi.h"
-#include "framebuf_vga.h"
+// #include "framebuf_vga.h"
 
 // defined in main.c
 void wait(uint32_t milliseconds);
@@ -78,64 +78,64 @@ static void charmemset(uint32_t idx, uint8_t c, uint8_t a, uint8_t fg, uint8_t b
   if( screen_inverted )
     { uint8_t c = fg; fg = bg; bg = c; }
 
-  if( is_dvi )
+  // if( is_dvi )
     return framebuf_dvi_charmemset(idx, c, a, fg, bg, n);
-  else
-    return framebuf_vga_charmemset(idx, c, a, fg, bg, n);
+  // else
+  //  return framebuf_vga_charmemset(idx, c, a, fg, bg, n);
 }
 
 
 static void charmemmove(uint32_t toidx, uint32_t fromidx, size_t n)
 {
-  if( is_dvi )
+  // if( is_dvi )
     return framebuf_dvi_charmemmove(toidx, fromidx, n);
-  else
-    return framebuf_vga_charmemmove(toidx, fromidx, n);
+  // else
+  //  return framebuf_vga_charmemmove(toidx, fromidx, n);
 }
 
 
 static void set_char_and_attr(uint32_t idx, uint32_t c)
 {
-  if( is_dvi )
+  // if( is_dvi )
     framebuf_dvi_set_char_and_attr(idx, c);
-  else
-    framebuf_vga_set_char_and_attr(idx, c);
+  // else
+  //  framebuf_vga_set_char_and_attr(idx, c);
 }
 
 
 static uint32_t get_char_and_attr(uint32_t idx)
 {
-  if( is_dvi )
+  // if( is_dvi )
     return framebuf_dvi_get_char_and_attr(idx);
-  else
-    return framebuf_vga_get_char_and_attr(idx);
+  // else
+   // return framebuf_vga_get_char_and_attr(idx);
 }
 
 
 static void set_char(uint32_t idx, uint8_t c)
 {
-  if( is_dvi )
+  // if( is_dvi )
     framebuf_dvi_set_char(idx, c);
-  else
-    framebuf_vga_set_char(idx, c);
+  // else
+  //  framebuf_vga_set_char(idx, c);
 }
 
 
 static uint8_t get_char(uint32_t idx)
 {
-  if( is_dvi )
+  // if( is_dvi )
     return framebuf_dvi_get_char(idx);
-  else
-    return framebuf_vga_get_char(idx);
+  // else
+  //  return framebuf_vga_get_char(idx);
 }
 
 
 static uint8_t get_attr(uint32_t idx)
 {
-  if( is_dvi )
+  // if( is_dvi )
     return framebuf_dvi_get_attr(idx);
-  else
-    return framebuf_vga_get_attr(idx);
+  // else
+   // return framebuf_vga_get_attr(idx);
 }
 
 
@@ -145,10 +145,10 @@ static void set_fullcolor(uint32_t idx, uint8_t fg, uint8_t bg)
   if( char_inverted != screen_inverted )
     { uint8_t c = fg; fg = bg; bg = c; }
 
-  if( is_dvi )
+  // if( is_dvi )
     return framebuf_dvi_set_color(idx, fg, bg);
-  else
-    return framebuf_vga_set_color(idx, fg, bg);
+  // else
+   // return framebuf_vga_set_color(idx, fg, bg);
 }
 
 
@@ -158,10 +158,10 @@ static void get_fullcolor(uint32_t idx, uint8_t *fg, uint8_t *bg)
   if( char_inverted != screen_inverted )
     { uint8_t *c = fg; fg = bg; bg = c; }
   
-  if( is_dvi )
+  // if( is_dvi )
     framebuf_dvi_get_color(idx, fg, bg);
-  else
-    framebuf_vga_get_color(idx, fg, bg);
+  // else
+   // framebuf_vga_get_color(idx, fg, bg);
 }
 
 
@@ -198,10 +198,10 @@ static void set_attr(uint32_t idx, uint8_t attr)
       set_fullcolor(idx,  bg,  fg);
     }
       
-  if( is_dvi )
+  // if( is_dvi )
     framebuf_dvi_set_attr(idx, attr);
-  else
-    framebuf_vga_set_attr(idx, attr);
+  // else
+   //  framebuf_vga_set_attr(idx, attr);
 }
 
 
@@ -508,22 +508,22 @@ void framebuf_set_screen_inverted(bool invert)
   if( invert != screen_inverted )
     {
       uint8_t fg, bg;
-      if( is_dvi )
-        {
+      // if( is_dvi )
+      //  {
           for(uint32_t idx=0; idx<MAX_COLS*MAX_ROWS; idx++)
             {
               framebuf_dvi_get_color(idx, &fg, &bg);
               framebuf_dvi_set_color(idx,  bg,  fg);
             }
-        }
-      else
-        {
-          for(uint32_t idx=0; idx<MAX_COLS*MAX_ROWS; idx++)
-            {
-              framebuf_vga_get_color(idx, &fg, &bg);
-              framebuf_vga_set_color(idx,  bg,  fg);
-            }
-        }
+      //  }
+      //else
+      //  {
+      //    for(uint32_t idx=0; idx<MAX_COLS*MAX_ROWS; idx++)
+      //      {
+      //        framebuf_vga_get_color(idx, &fg, &bg);
+      //        framebuf_vga_set_color(idx,  bg,  fg);
+      //      }
+      //  }
       
       screen_inverted = invert;
     }
@@ -570,6 +570,8 @@ void framebuf_init(bool forceDVI)
   gpio_init(PIN_HDMI_DETECT);
   gpio_set_dir(PIN_HDMI_DETECT, false); // input
 
+
+  forceDVI = true;
   if( forceDVI )
     is_dvi = true;
   else if( config_get_screen_display()==0 )
@@ -584,10 +586,10 @@ void framebuf_init(bool forceDVI)
   memset(framebuf_data, 0, sizeof(framebuf_data));
   screen_inverted = false;
 
-  if( is_dvi )
+  // if( is_dvi )
     framebuf_dvi_init(framebuf_data, framebuf_rowattr);
-  else
-    framebuf_vga_init(framebuf_data, framebuf_rowattr);
+  //else
+  //  framebuf_vga_init(framebuf_data, framebuf_rowattr);
 
   framebuf_apply_settings();
 
