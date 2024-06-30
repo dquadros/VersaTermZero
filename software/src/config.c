@@ -505,26 +505,27 @@ static const struct MenuItemStruct __in_flash(".configmenus") mainMenu[] =
 
 static uint16_t get_current_usbmode()
 {
-  if( settings.USB.mode==CFG_USBMODE_AUTODETECT )
-    {
-      if( tuh_inited() )
+//  if( settings.USB.mode==CFG_USBMODE_AUTODETECT )
+//    {
+//      if( tuh_inited() )
         return CFG_USBMODE_HOST;
-      else if( tud_inited() )
-        return CFG_USBMODE_DEVICE;
-      else
-        return CFG_USBMODE_OFF;
-    }
-  else
-    return settings.USB.mode;
+//      else if( tud_inited() )
+//        return CFG_USBMODE_DEVICE;
+//      else
+//        return CFG_USBMODE_OFF;
+//    }
+//  else
+//    return settings.USB.mode;
 }
 
 
 static uint16_t get_current_displaytype()
 {
-  if( settings.Screen.display==CFG_DISPTYPE_AUTODETECT )
-    return framebuf_is_dvi() ? CFG_DISPTYPE_DVI : CFG_DISPTYPE_VGA;
-  else
-    return settings.Screen.display;
+//  if( settings.Screen.display==CFG_DISPTYPE_AUTODETECT )
+//    return framebuf_is_dvi() ? CFG_DISPTYPE_DVI : CFG_DISPTYPE_VGA;
+//  else
+//    return settings.Screen.display;
+    return CFG_DISPTYPE_DVI;
 }
 
 

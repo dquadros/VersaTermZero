@@ -149,21 +149,21 @@ int main()
   serial_init();
 
   // initialize USB (needed for keyboard)
-  if( config_get_usb_mode()==1 )
-    tud_init(TUD_OPT_RHPORT);
-  else if( config_get_usb_mode()==2 )
+//  if( config_get_usb_mode()==1 )
+//    tud_init(TUD_OPT_RHPORT);
+//  else if( config_get_usb_mode()==2 )
     tuh_init(TUH_OPT_RHPORT);
-  else if( config_get_usb_mode()==3 )
-    {
-      // GPIO24 is high if the Pico's on-board USB port is connected to power (i.e. a host)
+//  else if( config_get_usb_mode()==3 )
+//    {
+//      // GPIO24 is high if the Pico's on-board USB port is connected to power (i.e. a host)
       // In that case we want to be a device, otherwise a host
-      gpio_init(24);
-      gpio_set_dir(24, false); // input
-      if( gpio_get(24) )
-        tud_init(TUH_OPT_RHPORT);
-      else
-        tuh_init(TUH_OPT_RHPORT);
-    }
+//      gpio_init(24);
+//      gpio_set_dir(24, false); // input
+//      if( gpio_get(24) )
+//        tud_init(TUH_OPT_RHPORT);
+//      else
+//        tuh_init(TUH_OPT_RHPORT);
+//    }
 
   // initialize keyboard
   keyboard_init();
