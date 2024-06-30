@@ -1,3 +1,10 @@
+# about this fork
+
+this fork is specific for the Waveshare RP2040 PiZero, so it removes not needed parts (like VGA and LED blinking), it also fix USB port to host for keyboard.
+
+SvenMb June 2024
+---
+
 # VersaTerm
 A versatile DIY serial terminal.
 
