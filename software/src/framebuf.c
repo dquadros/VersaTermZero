@@ -567,20 +567,20 @@ void framebuf_apply_settings()
 
 void framebuf_init(bool forceDVI)
 {
-  gpio_init(PIN_HDMI_DETECT);
-  gpio_set_dir(PIN_HDMI_DETECT, false); // input
+//  gpio_init(PIN_HDMI_DETECT);
+//  gpio_set_dir(PIN_HDMI_DETECT, false); // input
 
 
-  forceDVI = true;
-  if( forceDVI )
-    is_dvi = true;
-  else if( config_get_screen_display()==0 )
-    {
-      wait(100); // wait a short time for voltage to stabilize before reading
-      is_dvi = gpio_get(PIN_HDMI_DETECT);
-    }
-  else
-    is_dvi = config_get_screen_display()==1;
+//  forceDVI = true;
+//  if( forceDVI )
+//    is_dvi = true;
+//  else if( config_get_screen_display()==0 )
+//    {
+//      wait(100); // wait a short time for voltage to stabilize before reading
+//      is_dvi = gpio_get(PIN_HDMI_DETECT);
+//    }
+//  else
+//    is_dvi = config_get_screen_display()==1;
   
   font_init();
   memset(framebuf_data, 0, sizeof(framebuf_data));
